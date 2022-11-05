@@ -1,6 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/responsive/mobile_screen_layout.dart';
+import 'package:instagram_flutter/responsive/responsive_layout_screen.dart';
+import 'package:instagram_flutter/responsive/web_screen_layout.dart';
+import 'package:instagram_flutter/screens/login_screen.dart';
+import 'package:instagram_flutter/utils/colors.dart';
 
-void main() {
+Future<void> main() async {
+  //WidgetFlutterBinding kết nối giữa Widget và Flutter Engine
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyCieLgjKYxlO6Ax8bhVwPrTczTxGDLs0yg",
+        appId: "1:950918523575:web:2cdfff0ef4c980629c3b32",
+        messagingSenderId: '950918523575',
+        projectId: 'instagram-flutter-bd228',
+        storageBucket: "instagram-flutter-bd228.appspot.com",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 
@@ -13,10 +35,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Instagram FLutter',
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        body: Text("Let's build Instagram by Fflutter"),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: mobileBackgroundColor,
       ),
+      // home: const Scaffold(
+      //   body: ResponsiveLayout(
+      //     webScreenLayout: WebScreenLayout(),
+      //     mobileScreenLayout: MobileScreenLayout(),
+      //   ),
+      // ),
+      home: const LoginScreen(),
     );
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950918523575",
+    "project_id": "instagram-flutter-bd228",
+    "storage_bucket": "instagram-flutter-bd228.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950918523575:android:102047d05a82b6989c3b32",
+        "android_client_info": {
+          "package_name": "com.example.instagram_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950918523575-74d46pk2f2fta8vhkksttbp397lu9rdt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDExfn7r4OYEthhqPgpEQib9EZYJDiNqNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950918523575-74d46pk2f2fta8vhkksttbp397lu9rdt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
