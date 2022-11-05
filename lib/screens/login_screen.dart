@@ -47,28 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 64,
               ),
 
-              //Tạo widget tại lên hình đại diện
-              Stack(
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  // ignore: prefer_const_constructors
-                  CircleAvatar(
-                    radius: 64,
-                    // ignore: prefer_const_constructors
-                    backgroundImage: NetworkImage(
-                      "https://123design.org/wp-content/uploads/2020/07/AOTHOITRANGLM0231-qoobee-say-hi-300x300.jpg",
-                    ),
-                  )
-                ],
-              ),
-
               /*
               *Login
               */
               //Text field input your email
               TextFieldInput(
                   textEditingController: _emailController,
-                  hintText: "Enter your email123",
+                  hintText: "Enter your email",
                   textInputType: TextInputType.emailAddress),
               const SizedBox(
                 height: 24,
