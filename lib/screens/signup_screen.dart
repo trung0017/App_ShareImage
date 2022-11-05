@@ -3,16 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   //dispose() được gọi khi đối tượng State bị xóa vĩnh viễn.
   @override
@@ -20,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
+    _usernameController.dispose();
   }
 
   @override
@@ -43,9 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 64,
                 color: primaryColor,
               ),
-              const SizedBox(
-                height: 64,
-              ),
+              const SizedBox(height: 30),
 
               //Tạo widget tại lên hình đại diện
               Stack(
@@ -58,28 +60,58 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundImage: NetworkImage(
                       "https://123design.org/wp-content/uploads/2020/07/AOTHOITRANGLM0231-qoobee-say-hi-300x300.jpg",
                     ),
-                  )
+                  ),
+                  Positioned(
+                    //Chỉnh vị trí icon
+                    bottom: -10,
+                    left: 80,
+                    //Chỉnh vị trí
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.add_a_photo,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
                 ],
               ),
 
-              /*
-              *Login
-              */
+              const SizedBox(height: 30),
+
+              //Text field input your username
+              TextFieldInput(
+                  textEditingController: _usernameController,
+                  hintText: "Enter your username",
+                  textInputType: TextInputType.text),
+              const SizedBox(
+                height: 24,
+              ),
+
               //Text field input your email
               TextFieldInput(
                   textEditingController: _emailController,
-                  hintText: "Enter your email123",
+                  hintText: "Enter your email",
                   textInputType: TextInputType.emailAddress),
               const SizedBox(
                 height: 24,
               ),
+
               //Text field input password
               TextFieldInput(
                 textEditingController: _passwordController,
-                hintText: "Enter password",
+                hintText: "Enter your password",
                 textInputType: TextInputType.text,
                 isPass: true,
               ),
+              const SizedBox(
+                height: 24,
+              ),
+
+              //Text field input your bio
+              TextFieldInput(
+                  textEditingController: _bioController,
+                  hintText: "Enter your bio",
+                  textInputType: TextInputType.text),
               const SizedBox(
                 height: 24,
               ),
