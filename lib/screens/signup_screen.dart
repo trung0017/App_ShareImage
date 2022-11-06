@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_flutter/resources/auth_methods.dart';
 import 'package:instagram_flutter/utils/colors.dart';
+import 'package:instagram_flutter/utils/utils.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -16,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-
+  Uint8List? _image;
   //dispose() được gọi khi đối tượng State bị xóa vĩnh viễn.
   @override
   void dispose() {
@@ -25,6 +29,13 @@ class _SignupScreenState extends State<SignupScreen> {
     _passwordController.dispose();
     _bioController.dispose();
     _usernameController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
   }
 
   @override
@@ -36,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
           //width: double.infinity,
           child: SingleChildScrollView(
             reverse: true,
-            padding: EdgeInsets.all(32),
+            padding: const EdgeInsets.all(32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -57,14 +68,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 Stack(
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    // ignore: prefer_const_constructors
-                    CircleAvatar(
-                      radius: 64,
-                      // ignore: prefer_const_constructors
-                      backgroundImage: NetworkImage(
-                        "https://123design.org/wp-content/uploads/2020/07/AOTHOITRANGLM0231-qoobee-say-hi-300x300.jpg",
-                      ),
-                    ),
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundImage: MemoryImage(_image!),
+                          )
+                        : const CircleAvatar(
+                            radius: 64,
+                            // ignore: prefer_const_constructors
+                            backgroundImage: NetworkImage(
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjtNBgCacCwHhxVPj1ubPRygdT7X_7w_UrLQ&usqp=CAU",
+                            ),
+                          ),
                     Positioned(
                       //Chỉnh vị trí icon
                       bottom: -10,
@@ -74,7 +89,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         icon: const Icon(
                           Icons.add_a_photo,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          selectImage();
+                        },
                       ),
                     ),
                   ],
@@ -131,6 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       password: _passwordController.text,
                       username: _usernameController.text,
                       bio: _bioController.text,
+                      file: _image!,
                     );
                     print(res);
                   }),
