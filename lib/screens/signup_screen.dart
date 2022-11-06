@@ -21,6 +21,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isloading = false;
   //dispose() được gọi khi đối tượng State bị xóa vĩnh viễn.
   @override
   void dispose() {
@@ -142,16 +143,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 //Button login
                 //InkWell dùng xử lý các sự kiện onTab,...
                 InkWell(
-                  onTap: (() async {
-                    String res = await AuthMethods().signUpUser(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      username: _usernameController.text,
-                      bio: _bioController.text,
-                      file: _image!,
-                    );
-                    print(res);
-                  }),
+                  onTap: signUpUser,
                   child: Container(
                     width: double.infinity,
                     alignment: Alignment.center,
@@ -164,7 +156,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       color: blueColor,
                     ),
-                    child: const Text('Login'),
+                    child: _isloading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          )
+                        : const Text('Login'),
                   ),
                 ),
 
@@ -207,6 +205,27 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isloading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
+    setState(() {
+      _isloading = false;
+    });
+
+    if (res != 'success') {
+      // ignore: use_build_context_synchronously
+      showSnackBar(res, context);
+    }
   }
 }
 //Lỗi xuất hiện màu vàng vì sử dụng flexible
