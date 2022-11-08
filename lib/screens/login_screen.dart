@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_flutter/resources/auth_methods.dart';
+import 'package:instagram_flutter/responsive/mobile_screen_layout.dart';
+import 'package:instagram_flutter/responsive/responsive_layout_screen.dart';
+import 'package:instagram_flutter/responsive/web_screen_layout.dart';
+import 'package:instagram_flutter/screens/signup_screen.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:instagram_flutter/utils/utils.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
@@ -35,13 +39,30 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (res == "success") {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
+        ),
+      );
     } else {
+      //showSnackBar hiển thị thông báo khi đăng nhập không thành công
       // ignore: use_build_context_synchronously
       showSnackBar(res, context);
     }
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void navigateToSignup() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
   }
 
   @override
@@ -137,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //GestureDetectorcung cấp nhiều điều khiển hơn như kéo, v.v. mặt khác, nó không bao gồm chạm hiệu ứng gợn sóng InkWell.
                   GestureDetector(
                     //Sự kiện onTap
-                    onTap: () {},
+                    onTap: navigateToSignup,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 8,
@@ -157,3 +178,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+//trung@gmail.com
