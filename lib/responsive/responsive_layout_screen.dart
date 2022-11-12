@@ -1,7 +1,7 @@
 //responsive_layout_screen.dart dùng để xây dựng bố cục đáp ứng
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/providers/user_provider.dart';
-import 'package:instagram_flutter/utils/dimensions.dart';
+import 'package:instagram_flutter/utils/global_variables.dart';
 import 'package:provider/provider.dart';
 
 class ResponsiveLayout extends StatefulWidget {

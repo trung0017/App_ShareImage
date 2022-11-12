@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_flutter/models/user.dart' as model;
 import 'package:instagram_flutter/providers/user_provider.dart';
 import 'package:instagram_flutter/utils/colors.dart';
+import 'package:instagram_flutter/utils/global_variables.dart';
 import 'package:provider/provider.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -47,13 +48,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     return Scaffold(
       body: Center(
         child: PageView(
-          children: [
-            Text('Page1'),
-            Text('Page2'),
-            Text('Page3'),
-            Text('Page4'),
-            Text('Page5'),
-          ],
+          children: homeScreenItems,
           controller: pageController,
           onPageChanged: onPageChanged,
         ),
@@ -75,7 +70,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.video_collection,
+              Icons.add,
               color: _page == 2 ? primaryColor : secondaryColor,
             ),
           ),
