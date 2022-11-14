@@ -90,4 +90,16 @@ class FireStoreMethods {
     }
     return res;
   }
+
+  //Xóa bài viết
+  Future<String> deletePost(String postId) async {
+    String res = "Some error occurred";
+    try {
+      await _firestore.collection('posts').doc(postId).delete();
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
 }
