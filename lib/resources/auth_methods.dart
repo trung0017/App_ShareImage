@@ -21,21 +21,6 @@ class AuthMethods {
     return model.User.fromSnap(documentSnapshot);
   }
 
-  // User? _userFromFirebase(auth.User? user) {
-  //   if (user == null) {
-  //     return null;
-  //   }
-  //   return User(
-  //     username: user.username,
-  //     uid: user.uid,
-  //     photoUrl: user.photoUrl,
-  //     email: user.email,
-  //     bio: user.bio,
-  //     followers: user.followers,
-  //     following: user.following,
-  //   );
-  // }
-
   //Sign up user function
   Future<String> signUpUser({
     required String email,
@@ -97,5 +82,10 @@ class AuthMethods {
       res = error.toString();
     }
     return res;
+  }
+
+  //Đăng xuất
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

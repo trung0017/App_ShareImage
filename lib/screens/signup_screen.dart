@@ -173,11 +173,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(
                   height: 12,
                 ),
-                // Flexible(
-                //   flex: 2,
-                //   child: Container(),
-                // ),
-                //Sign up
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
