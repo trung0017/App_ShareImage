@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Class TextFieldInput trường nhập dữ liệu
 class TextFieldInput extends StatelessWidget {
   const TextFieldInput({
     Key? key,

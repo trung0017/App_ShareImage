@@ -1,10 +1,6 @@
 //PostCard dùng để hiển thị các bài viết
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:instagram_flutter/models/user.dart';
 import 'package:instagram_flutter/providers/user_provider.dart';
 import 'package:instagram_flutter/resources/firestore_methods.dart';
@@ -35,6 +31,7 @@ class _PostCardState extends State<PostCard> {
     fetchCommentLen();
   }
 
+  //Lấy số lượng comment từ Firebase
   fetchCommentLen() async {
     try {
       QuerySnapshot snap = await FirebaseFirestore.instance
@@ -55,6 +52,7 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
+
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(
@@ -149,7 +147,6 @@ class _PostCardState extends State<PostCard> {
                   width: double.infinity,
                   child: Image.network(
                     widget.snap['postUrl'],
-                    //fit: BoxFit.cover,
                   ),
                 ),
                 AnimatedOpacity(
@@ -207,7 +204,7 @@ class _PostCardState extends State<PostCard> {
                   ),
                 ),
                 icon: const Icon(
-                  Icons.comment,
+                  Icons.mode_comment_outlined,
                 ),
               ),
               IconButton(
@@ -241,7 +238,7 @@ class _PostCardState extends State<PostCard> {
                         .subtitle2!
                         .copyWith(fontWeight: FontWeight.w800),
                     child: Text(
-                      '${widget.snap['likes'].length} likes',
+                      '${widget.snap['likes'].length} lượt thích',
                       style: Theme.of(context).textTheme.bodyText2,
                     )),
                 Container(
@@ -269,7 +266,7 @@ class _PostCardState extends State<PostCard> {
                 InkWell(
                   child: Container(
                     child: Text(
-                      'View all $commentLen comments',
+                      'Xem tất cả $commentLen bình luận',
                       style: const TextStyle(
                         fontSize: 16,
                         color: secondaryColor,

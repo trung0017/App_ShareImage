@@ -56,11 +56,6 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                // Flexible(
-                //   flex: 3,
-                //   child: Container(),
-                // ),
-
                 //Logo
                 SvgPicture.asset(
                   "assets/ic_instagram.svg",
